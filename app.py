@@ -7,7 +7,6 @@ from extract import extract_amount
 from storage import save_expense
 
 # Tesseract path (Windows)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 st.title("💰 Financial Advisor & Expense Manager AI")
 
