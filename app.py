@@ -3,10 +3,11 @@ from PIL import Image
 import pytesseract
 from categorize import categorize
 from advice import give_advice
-from extract import extract_amount
+from extract import extract_text_and_amount
 from storage import save_expense
 
 # Tesseract path (Windows)
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 st.title("💰 Financial Advisor & Expense Manager AI")
 
@@ -18,14 +19,12 @@ if uploaded_file is not None:
     img = Image.open(uploaded_file)
     st.image(img, caption="Uploaded Image", use_column_width=True)
 
-    # Extract text
-    text = pytesseract.image_to_string(img)
-    
+    # ✅ NEW: Extract text + amount together
+    text, amount = extract_text_and_amount(uploaded_file)
+
     st.subheader("📝 Extracted Text")
     st.write(text)
 
-    # Extract amount
-    amount = extract_amount(text)
     st.subheader("💵 Amount")
     st.write(amount)
 
